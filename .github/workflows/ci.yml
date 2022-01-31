@@ -24,3 +24,7 @@ jobs:
       - name: Format packs
         run: |
           swipl -s scratch -g format_packs -t halt
+
+      - name: Install packs
+        run: |
+          swipl -s scratch -g install_packs -t halt
