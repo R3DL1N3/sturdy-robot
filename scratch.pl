@@ -14,4 +14,6 @@ install_packs :-
            catch(pack_install(Pack, [interactive(false)]), Catcher,
                  print_message(warning, Catcher))).
 
+:- initialization main.
+
 main :- install_packs.
