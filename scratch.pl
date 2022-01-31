@@ -11,4 +11,7 @@ format_packs :-
 install_packs :-
     query_packs('', Packs),
     forall(member(pack(Pack, _, _, _, _), Packs),
-           pack_install(Pack, [interactive(false)])).
+           catch(pack_install(Pack, [interactive(false)]), Catcher,
+                 print_message(warning, Catcher))).
+
+main :- install_packs.

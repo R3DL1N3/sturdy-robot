@@ -27,4 +27,4 @@ jobs:
 
       - name: Install packs
         run: |
-          swipl -s scratch -g install_packs -t halt
+          swipl -s scratch.pl
