@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://www.swi-prolog.org/build/PPA.html
+      - name: Install SWI-Prolog via PPA
+        run: |
+          sudo apt-get install software-properties-common
+          sudo apt-add-repository ppa:swi-prolog/stable
+          sudo apt-get update
+          sudo apt-get install swi-prolog
+
+      - name: Format packs
+        run: |
+          swipl -s scratch -g format_packs -t halt
+
+      - name: Install packs
+        run: |
+          swipl -s scratch.pl
